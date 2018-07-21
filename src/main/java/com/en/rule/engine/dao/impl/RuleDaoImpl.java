@@ -22,12 +22,17 @@ public class RuleDaoImpl  implements IRuleDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	RuleIdGenerator ruleIdGenerator;
 
 	@Override
 	public Rule createRule(Rule rule) {
-		this.jdbcTemplate.update(RuleQueries.CREATE_RULE, rule.getLowerBoundryOfDate(),rule.getUpperBoundryOfDate(),
-				rule.getValue(),rule.getLowerBoundryOfInt(), rule.getUpperBoundryOfDate());
-		return null;
+        rule.setId(ruleIdGenerator.generate());
+		this.jdbcTemplate.update(RuleQueries.CREATE_RULE, rule.getId(), rule.getLowerBoundryOfDate(),rule.getUpperBoundryOfDate(),
+				rule.getValue().getValue(),rule.getLowerBoundryOfInt(), rule.getUpperBoundryOfDate());
+		LOG.info("Rule created with id  {}", rule.getId());
+		return rule;
 	}
 
 	@Override
