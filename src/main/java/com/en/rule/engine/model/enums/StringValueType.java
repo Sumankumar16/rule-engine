@@ -1,4 +1,10 @@
 package com.en.rule.engine.model.enums;
+
+/**
+ * 
+ * @author sumankumar
+ *
+ */
 public enum StringValueType {
 	HIGH("HIGH"), LOW("LOW");
 	

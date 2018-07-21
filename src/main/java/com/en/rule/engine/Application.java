@@ -5,7 +5,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
+ * 
+ * @author Suman Kumar
+ *
+ */
 @SpringBootApplication
 @RestController
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})

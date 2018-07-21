@@ -6,7 +6,7 @@ public class Data  {
 	
 	private String ruleId;
 	
-	private List<Rule> rule;
+	private List<Rule> rules;
 
 	public Data() {
 		super();
@@ -17,8 +17,8 @@ public class Data  {
 		this.ruleId = ruleId;
 	}
 	
-	public Data(List<Rule> rule) {
-		this.rule = rule;
+	public Data(List<Rule> rules) {
+		this.rules = rules;
 	}
 
 	public String getRuleId() {
@@ -29,11 +29,11 @@ public class Data  {
 		this.ruleId = ruleId;
 	}
 	
-	public List<Rule> getRule() {
-		return rule;
+	public List<Rule> getRules() {
+		return rules;
 	}
 
-	public void setRule(List<Rule> rule) {
-		this.rule = rule;
+	public void setRules(List<Rule> rules) {
+		this.rules = rules;
 	}
 }

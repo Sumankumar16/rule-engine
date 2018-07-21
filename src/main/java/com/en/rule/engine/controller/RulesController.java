@@ -56,8 +56,8 @@ public class RulesController {
             throw new IllegalArgumentException("invalid Parameters passed " + extraQueryParams);
         }
         LOG.info("Creating a new rule..");
-		Data data = new Data();
-		data.setRuleId("testid");
+        rule = rulesService.createRule(rule);
+		Data data = new Data(Arrays.asList(rule));
 		MetaData metaData = new MetaData("Rule Created Successfully!", HttpStatus.CREATED.value());
 		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseTemplate(metaData, data));
 	}
@@ -74,7 +74,7 @@ public class RulesController {
         if(extraQueryParams.size() > 0){
             throw new IllegalArgumentException("invalid Parameters passed " + extraQueryParams);
         }
-        LOG.info("Creating a new rule..");
+        LOG.info("Applying rules..");
 		Data data = new Data();
 		data.setRuleId("testid");
 		MetaData metaData = new MetaData("Rule Applied Successfully!", HttpStatus.OK.value());
@@ -92,7 +92,7 @@ public class RulesController {
         if(extraQueryParams.size() > 0){
             throw new IllegalArgumentException("invalid Parameters passed " + extraQueryParams);
         }
-        LOG.info("Creating a new rule..");
+        LOG.info("Featching all existing rules..");
         List<Rule> rule = null;
 		Data data = new Data(rule);
 		MetaData metaData = new MetaData("List of all existing rules", HttpStatus.OK.value());
