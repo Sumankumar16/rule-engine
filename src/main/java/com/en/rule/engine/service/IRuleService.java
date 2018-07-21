@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.en.rule.engine.model.Rule;
 
-public interface IRulesService {
+public interface IRuleService {
 	public Rule createRule(Rule rule);
 	public List<Rule> fatchAllRules();
 }

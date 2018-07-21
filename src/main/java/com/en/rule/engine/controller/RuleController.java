@@ -23,7 +23,7 @@ import com.en.rule.engine.model.Data;
 import com.en.rule.engine.model.MetaData;
 import com.en.rule.engine.model.Rule;
 import com.en.rule.engine.model.Signal;
-import com.en.rule.engine.service.IRulesService;
+import com.en.rule.engine.service.IRuleService;
 
 /**
  * <P>
@@ -35,13 +35,13 @@ import com.en.rule.engine.service.IRulesService;
  *
  */
 @RestController
-public class RulesController {
+public class RuleController {
     
-	private final Logger LOG = LoggerFactory.getLogger(RulesController.class);
-	public static final List<? extends Object> CREATE_QUERY_PARAM = Arrays.asList("");
+	private final Logger LOG = LoggerFactory.getLogger(RuleController.class);
+	private static final List<? extends Object> CREATE_QUERY_PARAM = Arrays.asList("");
 	
 	@Autowired
-	private IRulesService rulesService;
+	private IRuleService ruleService;
 	
 	/**
 	 * This API will allow user to create a new rule.
@@ -56,7 +56,7 @@ public class RulesController {
             throw new IllegalArgumentException("invalid Parameters passed " + extraQueryParams);
         }
         LOG.info("Creating a new rule..");
-        rule = rulesService.createRule(rule);
+        rule = ruleService.createRule(rule);
 		Data data = new Data(Arrays.asList(rule));
 		MetaData metaData = new MetaData("Rule Created Successfully!", HttpStatus.CREATED.value());
 		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseTemplate(metaData, data));

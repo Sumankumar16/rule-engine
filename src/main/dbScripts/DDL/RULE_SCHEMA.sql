@@ -16,15 +16,13 @@ CREATE DATABASE ruleengine
 
 -- DROP TABLE RULES;
 
-CREATE TABLE public.rules (
-id serial,
-lower_boundry timestamp without time zone,
-upper_boundry timestamp without time zone,
-string_value_type text,
-lower_boundry_int numeric,
-upper_boundry_int numeric,
-CONSTRAINT rules_pkey PRIMARY KEY (id)
-) 
- 
-
+CREATE TABLE public.rule (
+	id numeric,
+	lower_boundry_date timestamp without time zone,
+	upper_boundry_date timestamp without time zone,
+	string_value_type text,
+	lower_boundry_int numeric,
+	upper_boundry_int numeric,
+	CONSTRAINT rules_pkey PRIMARY KEY (id)
+)
     
