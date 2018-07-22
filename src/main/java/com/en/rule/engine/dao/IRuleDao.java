@@ -12,5 +12,6 @@ import com.en.rule.engine.model.Rule;
 public interface IRuleDao {
 	public Rule createRule(Rule rule);
 	public List<Rule> fatchAllRules();
+	public Rule fatchRuleForRuleID(Long Id);
 
 }

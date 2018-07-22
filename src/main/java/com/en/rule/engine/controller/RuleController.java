@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,18 +64,20 @@ public class RuleController {
 	}
 	
 	/**
-	 * This API will apply rules on incoming signal.
-	 * @param signal
+	 * This API will apply rules on incoming signal and returns those list which 
+	 * violates the rule as a response.
+	 * @param signals
 	 * @param allRequestParameters
 	 * @return
 	 */
 	@RequestMapping(value = "/applyRule/{ruleId}", method=RequestMethod.POST)
-	public ResponseEntity<ApiResponseTemplate> applyRule(@Valid @RequestBody List<Signal> signal, @RequestParam(required = false) Map<String, List<? extends Object>> allRequestParameters) {
+	public ResponseEntity<ApiResponseTemplate> applyRule(@Valid @RequestBody List<Signal> signals,@PathVariable(required = true) Long ruleId, @RequestParam(required = false) Map<String, List<? extends Object>> allRequestParameters) {
 		List<? extends Object> extraQueryParams= allRequestParameters.keySet().stream().filter(e -> !CREATE_QUERY_PARAM.contains(e)).collect(Collectors.toList());
         if(extraQueryParams.size() > 0){
             throw new IllegalArgumentException("invalid Parameters passed " + extraQueryParams);
         }
         LOG.info("Applying rules..");
+        signals = ruleService.applyRule(signals, ruleId);
 		Data data = new Data();
 		data.setRuleId("testid");
 		MetaData metaData = new MetaData("Rule Applied Successfully!", HttpStatus.OK.value());
@@ -93,8 +96,27 @@ public class RuleController {
             throw new IllegalArgumentException("invalid Parameters passed " + extraQueryParams);
         }
         LOG.info("Featching all existing rules..");
-        List<Rule> rule = null;
+        List<Rule> rule = ruleService.fatchAllRules();
 		Data data = new Data(rule);
+		MetaData metaData = new MetaData("List of all existing rules", HttpStatus.OK.value());
+		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseTemplate(metaData, data));
+	}
+	
+	
+	/**
+	 * This API will fetch one rules
+	 * @param allRequestParameters
+	 * @return
+	 */
+	@RequestMapping(value = "/fetchRuleById/{ruleId}", method=RequestMethod.GET)
+	public ResponseEntity<ApiResponseTemplate> fatchRuleForRuleId(@PathVariable(required = true) Long ruleId, @RequestParam(required = false) Map<String, List<? extends Object>> allRequestParameters) {
+		List<? extends Object> extraQueryParams= allRequestParameters.keySet().stream().filter(e -> !CREATE_QUERY_PARAM.contains(e)).collect(Collectors.toList());
+        if(extraQueryParams.size() > 0){
+            throw new IllegalArgumentException("invalid Parameters passed " + extraQueryParams);
+        }
+        LOG.info("Featching all existing rules..");
+        Rule rule = ruleService.fatchRuleForRuleId(ruleId);
+		Data data = new Data(Arrays.asList(rule));
 		MetaData metaData = new MetaData("List of all existing rules", HttpStatus.OK.value());
 		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseTemplate(metaData, data));
 	}

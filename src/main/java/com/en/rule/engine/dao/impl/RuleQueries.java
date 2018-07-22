@@ -8,5 +8,7 @@ public class RuleQueries {
 											+ "lower_boundry_int,"
 											+ "upper_boundry_int )"
 											+ "VALUES(?, ?, ?, ?, ?, ?)";
-
+	
+	public static final String FETCH_ALL_RULE = "SELECT * FROM rule";
+	
 }

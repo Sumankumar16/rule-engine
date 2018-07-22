@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.en.rule.engine.dao.IRuleDao;
+import com.en.rule.engine.dao.rowmapper.RuleRowMapper;
+import com.en.rule.engine.dao.rowmapper.RulesRowMapper;
 import com.en.rule.engine.model.Rule;
 /**
  * 
@@ -37,6 +39,12 @@ public class RuleDaoImpl  implements IRuleDao {
 
 	@Override
 	public List<Rule> fatchAllRules() {
-		return null;
+		return  this.jdbcTemplate.query(RuleQueries.FETCH_ALL_RULE, new RulesRowMapper());
+	}
+	
+	@Override
+	public Rule fatchRuleForRuleID(Long id) {
+		String sql = RuleQueries.FETCH_ALL_RULE + " where id = " + id;
+		return this.jdbcTemplate.query(sql, new RuleRowMapper());
 	}
 }

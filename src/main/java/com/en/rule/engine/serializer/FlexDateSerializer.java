@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -16,10 +19,13 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  *      Custom date serialization</a>
  */
 public final class FlexDateSerializer extends JsonSerializer<Date> {
+	private static final Logger LOG = LoggerFactory.getLogger(FlexDateSerializer.class);
 
 	@Override
 	public void serialize(final Date value, final JsonGenerator gen, final SerializerProvider arg2) throws IOException {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-		gen.writeString(formatter.format(value));
+		String formattedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX").format(value);
+		LOG.info("Serializing date: {}", formattedDate);
+		gen.writeString(formattedDate);
+		LOG.info("Date serialized");
 	}
 }
