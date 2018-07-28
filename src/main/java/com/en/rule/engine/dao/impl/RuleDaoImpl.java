@@ -32,7 +32,7 @@ public class RuleDaoImpl  implements IRuleDao {
 	public Rule createRule(Rule rule) {
         rule.setId(ruleIdGenerator.generate());
 		this.jdbcTemplate.update(RuleQueries.CREATE_RULE, rule.getId(), rule.getLowerBoundryOfDate(),rule.getUpperBoundryOfDate(),
-				rule.getValue().getValue(),rule.getLowerBoundryOfInt(), rule.getUpperBoundryOfDate());
+				rule.getValue().getValue(),rule.getLowerBoundryOfInt(), rule.getUpperBoundryOfInt());
 		LOG.info("Rule created with id  {}", rule.getId());
 		return rule;
 	}

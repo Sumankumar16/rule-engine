@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Data  {
 	
-	private String ruleId;
+	private Long ruleId;
 	
 	private List<Rule> rules;
 	
@@ -14,7 +14,7 @@ public class Data  {
 		super();
 	}
 	
-	public Data(String ruleId) {
+	public Data(Long ruleId) {
 		super();
 		this.ruleId = ruleId;
 	}
@@ -23,18 +23,18 @@ public class Data  {
 		this.rules = rules;
 	}
 
-	public Data(String ruleId, List<Rule> rules, List<Signal> signals) {
+	public Data(Long ruleId, List<Rule> rules, List<Signal> signals) {
 		super();
 		this.ruleId = ruleId;
 		this.rules = rules;
 		this.signals = signals;
 	}
 
-	public String getRuleId() {
+	public Long getRuleId() {
 		return ruleId;
 	}
 
-	public void setRuleId(String ruleId) {
+	public void setRuleId(Long ruleId) {
 		this.ruleId = ruleId;
 	}
 	

@@ -78,8 +78,7 @@ public class RuleController {
         }
         LOG.info("Applying rules..");
         signals = ruleService.applyRule(signals, ruleId);
-		Data data = new Data();
-		data.setRuleId("testid");
+		Data data = new Data(ruleId,null, signals);
 		MetaData metaData = new MetaData("Rule Applied Successfully!", HttpStatus.OK.value());
 		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseTemplate(metaData, data));
 	}
