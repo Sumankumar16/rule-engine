@@ -1,5 +1,5 @@
 # Rule Engine
-Readme v1.0
+Draft Readme v1.0
 
 A rule engine which will allow user to create rule based on value_type for 
 incoming data and would allow to apply created rule to filter those data which voilated the rule.
@@ -36,7 +36,7 @@ Solution can be decomposed in two part:
 Based on problem statement a rule can be created on value_type and
 it also says there can be three type of value : "Datetime", "Integer", "String".
 
-Hence there are bassically total eight types of rules are possible.
+Hence there are bassically eight types of rules possible(avoiding few cases).
 ```
 
 ### Possible rules for value_type Integer:
@@ -49,6 +49,8 @@ whose value are greater then x. (Here x can be any integer).
 
 3. Given a integer value x, and y, create a rule which will voilate a data set
 whose value are in range x and y. (Here x and y can be any integer).
+
+Note: avoiding case where it can ask for intger value shouldn't fall in range of (x,y)
 ```
 
 ### Possible rules for value_type as Datetime:
@@ -61,6 +63,8 @@ whose value are greater then Date x.
 
 3. Given a Date x, y, create a rule which will voilate a data set
 whose value are in range x and y.
+
+Note: avoiding case where it can ask for Date value shouldn't fall in range of (x,y)
 ``` 
 
 ### Possible rules for value_type as String: 
@@ -69,6 +73,26 @@ VALUE can be either 'HIGH' or 'LOW'
 
 ```
 
+# Database modeling based on above possible rules and assumptions.
+
+```
+To cover all above mentioned possiblities of rule it needs 5 attributes in a rule model.
+lower and upper boundry value for Integer.
+
+lower and upper boundry value for Daate.
+
+and a single attribute for String value(because value can be either 'HIGH' or 'LOW')
+
+Based on above description the rule model can be derived as below:
+
+    lower_boundry_date timestamp without time zone,
+	upper_boundry_date timestamp without time zone,
+	string_value_type text,
+	lower_boundry_int numeric,
+	upper_boundry_int numeric
+	
+	
+``` 
 
 # Getting Started 
 ```
