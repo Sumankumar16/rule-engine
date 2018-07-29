@@ -1,15 +1,19 @@
 # Rule Engine
 Readme v1.0
-A rule engine which will allow user to create rule based on value type for 
+
+A rule engine which will allow user to create rule based on value_type for 
 incoming data and would allow to apply created rule to filter those data which voilated the rule.
  
 ## Problem Statement 
 ```
-A rule engine that will apply rules on data sets. 
 It Should allow user to do following:
- 1. Allow users to create rules on incoming data stream Execute rules on incoming stream and show the data that violates a rule.
- Incoming data stream is a tagged data stream. Each incoming data is a hashmap with following syntax
- { 'signal': 'ATL1', 'value': '234.98', 'value_type': 'Integer'} { 'signal': 'ATL2', 'value': 'HIGH', 'value_type': 'String'} { 'signal': 'ATL3', 'value': '23/07/2017 13:24:00.8765', 'value_type': 'Datetime'} ... ... ...
+ 1. Allow users to create rules on incoming data stream
+ 2.Execute rules on incoming stream and show the data that violates a rule.
+ 
+ Incoming data stream is a tagged data stream. Each incoming data is a hashmap with following syntax 
+ { 'signal': 'ATL1', 'value': '234.98', 'value_type': 'Integer'} 
+ { 'signal': 'ATL2', 'value': 'HIGH', 'value_type': 'String'}
+ { 'signal': 'ATL3', 'value': '23/07/2017 13:24:00.8765', 'value_type': 'Datetime'} ... ... ...
  
  
  In general, a data unit would have three keys
@@ -24,6 +28,47 @@ It Should allow user to do following:
  ATL2 value should never be LOW
  ATL3 should not be in future
 ```
+
+##Solution Approach
+```
+Solution can be decomposed in two part:
+1. Create a dynamic rule.
+Based on problem statement a rule can be created on value_type and
+it also says there can be three type of value : "Datetime", "Integer", "String".
+
+Hence there are bassically total eight types of rules are possible.
+```
+
+###Possible rules for value_type Integer:
+```
+1. Given a integer value x, create a rule which will voilate a data set
+whose value are lesser then x. (Here x can be any integer).
+
+2. Given a integer value x, create a rule which will voilate a data set
+whose value are greater then x. (Here x can be any integer).
+
+3. Given a integer value x, and y, create a rule which will voilate a data set
+whose value are in range x and y. (Here x and y can be any integer).
+```
+
+###Possible rules for value_type as Datetime:
+```
+1. Given a Date as x, create a rule which will voilate a data set
+whose value are lesser then Date x.
+
+2. Given a Date as x, create a rule which will voilate a data set
+whose value are greater then Date x.
+
+3. Given a Date x, y, create a rule which will voilate a data set
+whose value are in range x and y.
+``` 
+
+###Possible rules for value_type as String: 
+```
+VALUE can be either 'HIGH' or 'LOW'
+
+```
+
 
 #Getting Started 
 ```
@@ -75,7 +120,7 @@ Configuration file 'application.${env}.properties' is present in resource direct
 ## Running the app
 ```
 To run and test this application first it requires to setup database in local
-postgres server or any cloud.
+postgres server or any cloud based db (ex: AWS RDS).
 
 For local testing it is better to use local postgres server.
 
@@ -99,4 +144,15 @@ To get the images id.
 Docker images 
 
 docker run -e SPRING_PROFILES_ACTIVE=dev ${IMAGE_ID} | ${docker images name}
+```
+
+
+Author
+```
+Suman Kumar
+```
+
+License
+```
+This project is licensed under Apache License Version 2.0.
 ```
