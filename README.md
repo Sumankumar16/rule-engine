@@ -29,7 +29,7 @@ It Should allow user to do following:
  ATL3 should not be in future
 ```
 
-##Solution Approach
+## Solution Approach
 ```
 Solution can be decomposed in two part:
 1. Create a dynamic rule.
@@ -39,7 +39,7 @@ it also says there can be three type of value : "Datetime", "Integer", "String".
 Hence there are bassically total eight types of rules are possible.
 ```
 
-###Possible rules for value_type Integer:
+### Possible rules for value_type Integer:
 ```
 1. Given a integer value x, create a rule which will voilate a data set
 whose value are lesser then x. (Here x can be any integer).
@@ -51,7 +51,7 @@ whose value are greater then x. (Here x can be any integer).
 whose value are in range x and y. (Here x and y can be any integer).
 ```
 
-###Possible rules for value_type as Datetime:
+### Possible rules for value_type as Datetime:
 ```
 1. Given a Date as x, create a rule which will voilate a data set
 whose value are lesser then Date x.
@@ -63,19 +63,19 @@ whose value are greater then Date x.
 whose value are in range x and y.
 ``` 
 
-###Possible rules for value_type as String: 
+### Possible rules for value_type as String: 
 ```
 VALUE can be either 'HIGH' or 'LOW'
 
 ```
 
 
-#Getting Started 
+# Getting Started 
 ```
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 ```
 
-##Prerequisites
+## Prerequisites
 ```
 1. JDK 1.8
 2. Maven 3.3
