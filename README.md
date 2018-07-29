@@ -38,7 +38,12 @@ These instructions will get you a copy of the project up and running on your loc
 4. Docker(optional)
 
 ```
+## Cloning in local system
 
+```
+git clone https://github.com/Sumankumar16/rule-engine.git
+
+```
 
 ## Build
 
