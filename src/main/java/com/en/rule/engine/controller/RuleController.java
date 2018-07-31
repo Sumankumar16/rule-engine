@@ -57,12 +57,13 @@ public class RuleController {
             throw new IllegalArgumentException("invalid Parameters passed " + extraQueryParams);
         }
         LOG.info("Creating a new rule..");
+        ruleAttributesValidator(rule);
         rule = ruleService.createRule(rule);
 		Data data = new Data(Arrays.asList(rule));
 		MetaData metaData = new MetaData("Rule Created Successfully!", HttpStatus.CREATED.value());
 		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseTemplate(metaData, data));
 	}
-	
+
 	/**
 	 * This API will apply rules on incoming signal and returns those list which 
 	 * violates the rule as a response.
@@ -103,7 +104,7 @@ public class RuleController {
 	
 	
 	/**
-	 * This API will fetch one rules
+	 * This API will fetch specific rule based on ruleId
 	 * @param allRequestParameters
 	 * @return
 	 */
@@ -120,4 +121,24 @@ public class RuleController {
 		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseTemplate(metaData, data));
 	}
 	
+	/***
+	 * This method will do the basic validation for rule attributes in order to make sure created 
+	 * rule is valid one.like lower bound of Integer and date must be lesser then it's corresponding 
+	 *  upper bound value. 
+	 * @param rule
+	 */
+	private void ruleAttributesValidator(Rule rule) {
+		if (null == rule.getLowerBoundryOfDate() && null == rule.getUpperBoundryOfDate()) {
+			throw new IllegalArgumentException(
+					"both lower and upper boundry of Date can't be null or empty at the same time");
+		} else if (null != rule.getLowerBoundryOfDate() && null != rule.getUpperBoundryOfDate() && rule.getLowerBoundryOfDate().compareTo(rule.getUpperBoundryOfDate()) >= 0) {
+			throw new IllegalArgumentException("Lower boundry of Date must be lesser then It's upper boundry");
+		} else if (null == rule.getLowerBoundryOfInt() && null == rule.getUpperBoundryOfInt()) {
+			throw new IllegalArgumentException(
+					"both lower and upper boundry of Int can't be null or empty at the same time");
+		} else if (null != rule.getLowerBoundryOfInt() && null != rule.getUpperBoundryOfInt()
+				&& rule.getLowerBoundryOfInt() > rule.getUpperBoundryOfInt()) {
+			throw new IllegalArgumentException("Lower boundry of Int must be lesser then It's upper boundry");
+		}
+	}
 }
