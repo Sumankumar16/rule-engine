@@ -44,6 +44,16 @@ public class RuleController {
 	@Autowired
 	private IRuleService ruleService;
 	
+	/***
+	 * Health check
+	 * @return
+	 */
+	@RequestMapping(value = "/health", method = RequestMethod.GET)
+	public String health() {
+		String response = "Rule Engine is up and running..";
+		return response;
+	}
+	
 	/**
 	 * This API will allow user to create a new rule.
 	 * @param rule

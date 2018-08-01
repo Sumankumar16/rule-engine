@@ -156,6 +156,16 @@ spring.datasource.username=postgres
 spring.datasource.password=postgres
 
 ```
+### Command to Run as a standalone server:
+```
+mvn spring-boot:run -Dspring.profiles.active=dev
+```
+
+### health check
+
+```
+localhost:8080/health
+```
 
 
 ### Docker run
@@ -165,12 +175,25 @@ Mount volume for application logs : The container path is /logs/
 
 To get the images id.
 
-Docker images 
+docker images 
 
-docker run -e SPRING_PROFILES_ACTIVE=dev ${IMAGE_ID} | ${docker images name}
+docker run -e SPRING_PROFILES_ACTIVE=dev -d -p 8080:8080  ${IMAGE_ID} 
+ 						OR
+ 						
+docker run -e SPRING_PROFILES_ACTIVE=dev -d -p 8080:8080 ${docker images name}
+where ${docker images name} = REPOSITORY:TAG 
+				
 ```
+### Health check 
+```
+{docker-machine ip}:8080/health 
+```
+ 
+### How to test feature
 
-
+```
+Please check TEST.md for details.
+```
 Author
 ```
 Suman Kumar
