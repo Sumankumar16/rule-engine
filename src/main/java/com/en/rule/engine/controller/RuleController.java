@@ -69,7 +69,7 @@ public class RuleController {
         LOG.info("Creating a new rule..");
         ruleAttributesValidator(rule);
         rule = ruleService.createRule(rule);
-		Data data = new Data(Arrays.asList(rule));
+		Data data = new Data(rule.getId(),Arrays.asList(rule), null);
 		MetaData metaData = new MetaData("Rule Created Successfully!", HttpStatus.CREATED.value());
 		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseTemplate(metaData, data));
 	}
@@ -126,7 +126,7 @@ public class RuleController {
         }
         LOG.info("Featching all existing rules..");
         Rule rule = ruleService.fatchRuleForRuleId(ruleId);
-		Data data = new Data(Arrays.asList(rule));
+		Data data = new Data(rule.getId(),Arrays.asList(rule), null);
 		MetaData metaData = new MetaData("List of all existing rules", HttpStatus.OK.value());
 		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseTemplate(metaData, data));
 	}

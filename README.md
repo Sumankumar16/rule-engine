@@ -116,11 +116,15 @@ git clone https://github.com/Sumankumar16/rule-engine.git
 
 ## Build
 
-### Build fat jar
+### Build fat jar and generate JAVA API docs
 To build a fat jar (jar + all dependencies), execute:
 
 ```
 mvn clean build
+
+
+generated API docs will at at target/apidocs
+JAR at target/
 ```
 
 ### Build by skipping the test
