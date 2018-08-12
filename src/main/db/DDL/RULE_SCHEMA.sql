@@ -25,4 +25,5 @@ CREATE TABLE public.rule (
 	upper_boundry_int numeric,
 	CONSTRAINT rules_pkey PRIMARY KEY (id)
 )
-    
+
+CREATE SEQUENCE rules_id_sequence;    
